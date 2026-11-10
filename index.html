@@ -17,13 +17,11 @@
         .btn-option { transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; user-select: none; }
         .btn-option:active { transform: scale(0.92); }
         
-        /* 귀여운 파스텔 선택 효과 */
         .selected-good { background-color: #dcfce7 !important; border-color: #22c55e !important; box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3); transform: translateY(-2px); }
         .selected-soso { background-color: #fef9c3 !important; border-color: #eab308 !important; box-shadow: 0 10px 15px -3px rgba(234, 179, 8, 0.3); transform: translateY(-2px); }
         .selected-bad { background-color: #fee2e2 !important; border-color: #ef4444 !important; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3); transform: translateY(-2px); }
         .selected-check { background-color: #e0e7ff !important; border-color: #6366f1 !important; color: #4338ca !important; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); transform: translateY(-2px); }
 
-        /* 🍁 낙엽 애니메이션 효과 */
         .leaf-container {
             position: fixed;
             top: 0;
@@ -50,10 +48,8 @@
 </head>
 <body class="bg-amber-50/50 min-h-screen pb-12">
 
-    <!-- 🍂 떨어지는 낙엽 -->
     <div class="leaf-container" id="leaf-container"></div>
 
-    <!-- 헤더 -->
     <header class="bg-amber-400 text-slate-800 sticky top-0 z-50 shadow-sm border-b-2 border-amber-200">
         <div class="max-w-3xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <h1 class="text-base md:text-lg font-black flex items-center gap-2 font-aac text-slate-800">
@@ -68,7 +64,6 @@
 
     <main class="max-w-3xl mx-auto px-4 mt-6 relative z-10">
 
-        <!-- 1. 설문 작성 영역 -->
         <section id="section-survey">
             <div class="bg-white rounded-3xl p-6 shadow-sm mb-6 border-2 border-amber-100 text-center">
                 <div class="inline-block px-3 py-1 bg-amber-100 text-amber-800 font-bold rounded-full text-xs mb-2">🍁 알록달록 AAC 쉬운 설문지</div>
@@ -92,13 +87,12 @@
 
             <form id="survey-form" class="space-y-6">
                 
-                <!-- Ⅰ. 만족도 조사 영역 -->
                 <div class="bg-amber-400 text-slate-800 p-4 rounded-2xl shadow-sm flex items-center gap-2 border-2 border-amber-300">
                     <span class="text-2xl">⭐</span>
                     <h3 class="font-black text-lg font-aac">Ⅰ. 2026년 활동 만족도 조사</h3>
                 </div>
 
-                <!-- 문항 1 -->
+                <!-- 1번 문항 (좋았어요 / 보통이에요 / 별로였어요) -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-amber-100 space-y-6">
                     <div class="flex items-center gap-2">
                         <span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-bold rounded-lg text-sm">1번</span>
@@ -107,7 +101,7 @@
                     <div id="q1-container" class="space-y-4"></div>
                 </div>
 
-                <!-- 문항 2 -->
+                <!-- 2번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-amber-100">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-bold rounded-lg text-sm">2번</span>
@@ -117,7 +111,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="q2-container"></div>
                 </div>
 
-                <!-- 문항 3 -->
+                <!-- 3번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-amber-100">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="px-2.5 py-1 bg-amber-100 text-amber-800 font-bold rounded-lg text-sm">3번</span>
@@ -139,13 +133,12 @@
                     </div>
                 </div>
 
-                <!-- Ⅱ. 욕구조사 영역 -->
                 <div class="bg-emerald-400 text-slate-800 p-4 rounded-2xl shadow-sm flex items-center gap-2 border-2 border-emerald-300">
                     <span class="text-2xl">💡</span>
                     <h3 class="font-black text-lg font-aac">Ⅱ. 2027년 활동 욕구조사</h3>
                 </div>
 
-                <!-- 문항 4 -->
+                <!-- 4번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-sm">4번</span>
@@ -155,7 +148,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="q4-container"></div>
                 </div>
 
-                <!-- 문항 5 -->
+                <!-- 5번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-sm">5번</span>
@@ -165,7 +158,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="q5-container"></div>
                 </div>
 
-                <!-- 문항 6 -->
+                <!-- 6번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-sm">6번</span>
@@ -174,7 +167,7 @@
                     <div class="grid grid-cols-2 gap-3" id="q6-container"></div>
                 </div>
 
-                <!-- 문항 7 -->
+                <!-- 7번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-sm">7번</span>
@@ -183,7 +176,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="q7-container"></div>
                 </div>
 
-                <!-- 문항 8 -->
+                <!-- 8번 문항 -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
                     <div class="flex items-center gap-2 mb-3">
                         <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-sm">8번</span>
@@ -192,14 +185,14 @@
                     <textarea id="q8-text" rows="3" placeholder="자유롭게 이야기를 남겨주세요 (선택사항)" class="w-full p-4 border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-emerald-400 focus:outline-none"></textarea>
                 </div>
 
-                <!-- 제출하기 버튼 -->
+                <!-- 제출 버튼 -->
                 <button type="button" id="btn-submit" onclick="submitSurvey()" class="w-full py-4 bg-amber-400 hover:bg-amber-500 text-slate-900 font-black text-xl rounded-2xl shadow-md transition border-2 border-amber-300">
                     🚀 완료했어요! 제출하기
                 </button>
             </form>
         </section>
 
-        <!-- 2. 완료 안내 화면 -->
+        <!-- 완료 화면 -->
         <section id="section-thanks" class="hidden bg-white p-8 rounded-3xl shadow-sm text-center border-2 border-amber-200 my-8">
             <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-bounce">🎉</div>
             <h2 class="text-2xl md:text-3xl font-black text-slate-800 font-aac mb-3">소중한 응답이 제출되었습니다!</h2>
@@ -209,7 +202,7 @@
             <button onclick="resetSurvey()" class="px-6 py-3 bg-amber-100 text-amber-900 font-bold rounded-xl hover:bg-amber-200 transition">🔄 새로 제출하기</button>
         </section>
 
-        <!-- 3. 선생님용 실시간 통계 영역 -->
+        <!-- 통계 화면 -->
         <section id="section-stats" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-amber-100 flex justify-between items-center">
                 <div>
@@ -244,7 +237,6 @@
     </main>
 
     <script>
-        // 🍁 낙엽 애니메이션
         function createLeaf() {
             const container = document.getElementById('leaf-container');
             if(!container) return;
@@ -267,7 +259,6 @@
 
         const surveyData = { q1: {}, q2: [], q3: '', q4: [], q5: [], q6: '', q7: '', q8: '' };
 
-        // 1번 귀여운 AAC 아이콘
         const q1Items = [
             { title: '1) 깃발 만들기', icon: '🚩', bg: 'bg-red-100' },
             { title: '2) 텃밭 가꾸기', icon: '🌱', bg: 'bg-green-100' },
@@ -276,7 +267,6 @@
             { title: '5) 미니올림픽', icon: '🏅', bg: 'bg-blue-100' }
         ];
 
-        // 2, 4번 활동 아이콘
         const activities = [
             { name: '깃발 만들기', icon: '🚩', bg: 'bg-red-50 border-red-200' },
             { name: '텃밭 가꾸기', icon: '🌱', bg: 'bg-green-50 border-green-200' },
@@ -285,7 +275,6 @@
             { name: '미니올림픽', icon: '🏅', bg: 'bg-blue-50 border-blue-200' }
         ];
 
-        // 5번 신규활동 귀여운 아이콘
         const newActivities = [
             { name: '미술·공예활동', desc: '그림 그리기, 만들기', icon: '🎨', bg: 'bg-pink-100' },
             { name: '음악활동', desc: '노래, 악기 연주', icon: '🎤', bg: 'bg-purple-100' },
@@ -297,11 +286,199 @@
             { name: '협동활동', desc: '친구들과 함께하는 게임', icon: '🤝', bg: 'bg-teal-100' }
         ];
 
-        // Q1 UI 생성
+        // 1번 문항 선택지 (좋았어요 / 보통이에요 / 별로였어요) 생성
         const q1Container = document.getElementById('q1-container');
         q1Items.forEach(item => {
             q1Container.innerHTML += `
                 <div class="p-4 bg-slate-50 rounded-2xl border-2 border-slate-100">
                     <div class="flex items-center gap-3 mb-3">
                         <span class="w-12 h-12 ${item.bg} rounded-2xl flex items-center justify-center text-2xl shadow-sm">${item.icon}</span>
-                        <p class
+                        <p class="font-bold text-slate-800 text-base">${item.title}</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="selectQ1('${item.title}', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
+                            <span class="text-3xl">😊</span><span>좋았어요</span>
+                        </button>
+                        <button type="button" onclick="selectQ1('${item.title}', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
+                            <span class="text-3xl">😐</span><span>보통이에요</span>
+                        </button>
+                        <button type="button" onclick="selectQ1('${item.title}', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
+                            <span class="text-3xl">🙁</span><span>별로였어요</span>
+                        </button>
+                    </div>
+                </div>`;
+        });
+
+        const q2Container = document.getElementById('q2-container');
+        const q4Container = document.getElementById('q4-container');
+        activities.forEach(act => {
+            q2Container.innerHTML += `
+                <button type="button" onclick="selectMultiLimit('q2', '${act.name}', this, 2)" class="btn-option p-4 border-2 ${act.bg} rounded-2xl flex flex-col items-center text-center gap-2">
+                    <span class="text-4xl">${act.icon}</span>
+                    <span class="text-sm font-bold text-slate-800">${act.name}</span>
+                </button>`;
+            q4Container.innerHTML += `
+                <button type="button" onclick="selectMulti('q4', '${act.name}', this)" class="btn-option p-4 border-2 ${act.bg} rounded-2xl flex flex-col items-center text-center gap-2">
+                    <span class="text-4xl">${act.icon}</span>
+                    <span class="text-sm font-bold text-slate-800">${act.name}</span>
+                </button>`;
+        });
+
+        const q5Container = document.getElementById('q5-container');
+        newActivities.forEach(act => {
+            q5Container.innerHTML += `
+                <button type="button" onclick="selectMulti('q5', '${act.name}', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
+                    <span class="w-12 h-12 ${act.bg} rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">${act.icon}</span>
+                    <div>
+                        <div class="text-sm font-bold text-slate-800">${act.name}</div>
+                        <div class="text-xs text-slate-400 font-normal">${act.desc}</div>
+                    </div>
+                </button>`;
+        });
+
+        const q6Options = [
+            { text: '한 달에 1번', icon: '📅' },
+            { text: '한 달에 2번', icon: '📆' },
+            { text: '일주일에 1번', icon: '⏰' },
+            { text: '지금처럼 하는 것이 좋아요', icon: '👍' }
+        ];
+        const q6Container = document.getElementById('q6-container');
+        q6Options.forEach(opt => {
+            q6Container.innerHTML += `
+                <button type="button" onclick="selectSingle('q6', '${opt.text}', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
+                    <span class="text-2xl">${opt.icon}</span>
+                    <span class="text-sm font-bold text-slate-700">${opt.text}</span>
+                </button>`;
+        });
+
+        const q7Options = [
+            { text: '네, 직접 선택하고 싶어요', icon: '🙋‍♂️' },
+            { text: '선생님의 도움을 받아 선택하고 싶어요', icon: '🤝' },
+            { text: '아니요', icon: '🙅‍♂️' }
+        ];
+        const q7Container = document.getElementById('q7-container');
+        q7Options.forEach(opt => {
+            q7Container.innerHTML += `
+                <button type="button" onclick="selectSingle('q7', '${opt.text}', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
+                    <span class="text-2xl">${opt.icon}</span>
+                    <span class="text-sm font-bold text-slate-700">${opt.text}</span>
+                </button>`;
+        });
+
+        function selectQ1(title, val, btn, type) {
+            surveyData.q1[title] = val;
+            Array.from(btn.parentElement.children).forEach(b => {
+                b.className = "btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1";
+            });
+            btn.classList.add('selected-' + type);
+        }
+
+        function selectSingle(key, val, btn, type) {
+            surveyData[key] = val;
+            Array.from(btn.parentElement.children).forEach(b => {
+                b.classList.remove('selected-good', 'selected-soso', 'selected-bad', 'selected-check');
+            });
+            btn.classList.add('selected-' + type);
+        }
+
+        function selectMulti(key, val, btn) {
+            const idx = surveyData[key].indexOf(val);
+            if (idx > -1) {
+                surveyData[key].splice(idx, 1);
+                btn.classList.remove('selected-check');
+            } else {
+                surveyData[key].push(val);
+                btn.classList.add('selected-check');
+            }
+        }
+
+        function selectMultiLimit(key, val, btn, limit) {
+            const idx = surveyData[key].indexOf(val);
+            if (idx > -1) {
+                surveyData[key].splice(idx, 1);
+                btn.classList.remove('selected-check');
+            } else {
+                if (surveyData[key].length >= limit) {
+                    alert(`최대 ${limit}개까지만 고를 수 있습니다.`);
+                    return;
+                }
+                surveyData[key].push(val);
+                btn.classList.add('selected-check');
+            }
+        }
+
+        let isSubmitting = false;
+        let totalCount = 0;
+        let comments = [];
+
+        function submitSurvey() {
+            if (isSubmitting) return;
+
+            const name = document.getElementById('user-name').value.trim();
+            if (!name) { alert('이름을 입력해주세요!'); return; }
+            if (Object.keys(surveyData.q1).length < 5) { alert('1번 항목의 표정을 모두 선택해주세요!'); return; }
+            if (!surveyData.q3) { alert('3번 전반적 만족도를 선택해주세요!'); return; }
+
+            isSubmitting = true;
+            const btn = document.getElementById('btn-submit');
+            btn.disabled = true;
+            btn.innerText = '⏳ 제출 처리 중...';
+            btn.classList.replace('bg-amber-400', 'bg-slate-300');
+
+            totalCount++;
+            const q8Text = document.getElementById('q8-text').value.trim();
+            if (q8Text) comments.push(`${name}: ${q8Text}`);
+
+            document.getElementById('total-count').innerText = totalCount + '명';
+
+            setTimeout(() => {
+                document.getElementById('section-survey').classList.add('hidden');
+                document.getElementById('section-thanks').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                isSubmitting = false;
+                btn.disabled = false;
+                btn.innerText = '🚀 완료했어요! 제출하기';
+                btn.classList.replace('bg-slate-300', 'bg-amber-400');
+            }, 300);
+        }
+
+        function resetSurvey() {
+            document.getElementById('user-name').value = '';
+            document.getElementById('q8-text').value = '';
+            location.reload();
+        }
+
+        function switchTab(tab) {
+            if (tab === 'survey') {
+                document.getElementById('section-survey').classList.remove('hidden');
+                document.getElementById('section-stats').classList.add('hidden');
+                document.getElementById('section-thanks').classList.add('hidden');
+            } else {
+                document.getElementById('section-survey').classList.add('hidden');
+                document.getElementById('section-thanks').classList.add('hidden');
+                document.getElementById('section-stats').classList.remove('hidden');
+                renderCharts();
+            }
+        }
+
+        let chart3;
+        function renderCharts() {
+            const ctx3 = document.getElementById('chart-q3').getContext('2d');
+            if (chart3) chart3.destroy();
+            chart3 = new Chart(ctx3, {
+                type: 'doughnut',
+                data: {
+                    labels: ['만족해요 🥰', '보통이에요 🙂', '아쉬워요 🙁'],
+                    datasets: [{ data: [1, 0, 0], backgroundColor: ['#22c55e', '#eab308', '#ef4444'] }]
+                }
+            });
+
+            const commentsList = document.getElementById('comments-list');
+            if (comments.length > 0) {
+                commentsList.innerHTML = comments.map(c => `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">💬 ${c}</div>`).join('');
+            }
+        }
+    </script>
+</body>
+</html>
