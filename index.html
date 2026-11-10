@@ -4,47 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026년 이용인 간담회 만족도 및 2027년 욕구조사</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
-
     <style>
         body { font-family: 'Gowun Dodum', 'Noto Sans KR', sans-serif; background-color: #fffbeb; touch-action: manipulation; position: relative; overflow-x: hidden; }
         .font-aac { font-family: 'Gowun Dodum', sans-serif; }
         .btn-option { transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; user-select: none; }
         .btn-option:active { transform: scale(0.92); }
-        
         .selected-good { background-color: #dcfce7 !important; border-color: #22c55e !important; box-shadow: 0 8px 12px -2px rgba(34, 197, 94, 0.3); transform: translateY(-2px); }
         .selected-soso { background-color: #fef9c3 !important; border-color: #eab308 !important; box-shadow: 0 8px 12px -2px rgba(234, 179, 8, 0.3); transform: translateY(-2px); }
         .selected-bad { background-color: #fee2e2 !important; border-color: #ef4444 !important; box-shadow: 0 8px 12px -2px rgba(239, 68, 68, 0.3); transform: translateY(-2px); }
         .selected-check { background-color: #e0e7ff !important; border-color: #6366f1 !important; color: #4338ca !important; box-shadow: 0 8px 12px -2px rgba(99, 102, 241, 0.3); transform: translateY(-2px); }
-
-        /* 🍁 낙엽 애니메이션 */
-        .leaf-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999; overflow: hidden;
-        }
-        .leaf {
-            position: absolute; top: -50px; font-size: 26px; user-select: none;
-            animation: fall linear infinite;
-        }
+        .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+        .leaf { position: absolute; top: -50px; font-size: 26px; user-select: none; animation: fall linear infinite; }
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.9; }
             50% { transform: translateY(50vh) rotate(180deg) translateX(30px); }
             100% { transform: translateY(105vh) rotate(360deg) translateX(-30px); opacity: 0.2; }
         }
+        .chart-box { position: relative; width: 100%; height: 260px; }
     </style>
 </head>
 <body class="bg-amber-50/50 min-h-screen pb-12">
 
-    <!-- 🍂 떨어지는 낙엽 -->
     <div class="leaf-container" id="leaf-container"></div>
 
-    <!-- 헤더 -->
     <header class="bg-amber-400 text-slate-800 sticky top-0 z-50 shadow-sm border-b-2 border-amber-200">
         <div class="max-w-3xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <h1 class="text-base md:text-lg font-black flex items-center gap-2 font-aac text-slate-800">
@@ -63,9 +48,7 @@
         <section id="section-survey">
             <div class="bg-white rounded-3xl p-6 shadow-sm mb-6 border-2 border-amber-100 text-center">
                 <div class="inline-block px-3.5 py-1 bg-amber-100 text-amber-800 font-bold rounded-full text-xs mb-2">🍁 2026 이용인 간담회 및 2027 욕구조사</div>
-                <h2 class="text-xl md:text-2xl font-black text-slate-800 font-aac mb-2">
-                    2026년 이용인 간담회 만족도 및 2027년 욕구조사
-                </h2>
+                <h2 class="text-xl md:text-2xl font-black text-slate-800 font-aac mb-2">2026년 이용인 간담회 만족도 및 2027년 욕구조사</h2>
                 <p class="text-slate-600 text-sm mb-4 leading-relaxed font-bold">
                     본 설문지는 2026년 이용인 간담회 활동에 대한 의견을 듣고, 2027년에 하고 싶은 활동을 알아보기 위한 조사입니다. 자신의 생각에 맞는 답을 선택해 주세요.
                 </p>
@@ -83,10 +66,8 @@
 
             <form id="survey-form" class="space-y-6">
                 
-                <!-- Ⅰ. 만족도 조사 영역 -->
                 <div class="bg-amber-400 text-slate-800 p-4 rounded-2xl shadow-sm flex items-center gap-2 border-2 border-amber-300">
-                    <span class="text-2xl">⭐</span>
-                    <h3 class="font-black text-lg font-aac">Ⅰ. 2026년 활동 만족도 조사</h3>
+                    <span class="text-2xl">⭐</span><h3 class="font-black text-lg font-aac">Ⅰ. 2026년 활동 만족도 조사</h3>
                 </div>
 
                 <!-- 1번 문항 -->
@@ -102,15 +83,9 @@
                             <p class="font-bold text-slate-800 text-base">1) 깃발 만들기</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="selectQ1('1) 깃발 만들기', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😊</span><span>좋았어요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('1) 깃발 만들기', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😐</span><span>보통이에요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('1) 깃발 만들기', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">🙁</span><span>별로였어요</span>
-                            </button>
+                            <button type="button" onclick="selectQ1('깃발 만들기', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😊</span><span>좋았어요</span></button>
+                            <button type="button" onclick="selectQ1('깃발 만들기', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😐</span><span>보통이에요</span></button>
+                            <button type="button" onclick="selectQ1('깃발 만들기', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">🙁</span><span>별로였어요</span></button>
                         </div>
                     </div>
 
@@ -120,15 +95,9 @@
                             <p class="font-bold text-slate-800 text-base">2) 텃밭 가꾸기</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="selectQ1('2) 텃밭 가꾸기', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😊</span><span>좋았어요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('2) 텃밭 가꾸기', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😐</span><span>보통이에요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('2) 텃밭 가꾸기', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">🙁</span><span>별로였어요</span>
-                            </button>
+                            <button type="button" onclick="selectQ1('텃밭 가꾸기', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😊</span><span>좋았어요</span></button>
+                            <button type="button" onclick="selectQ1('텃밭 가꾸기', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😐</span><span>보통이에요</span></button>
+                            <button type="button" onclick="selectQ1('텃밭 가꾸기', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">🙁</span><span>별로였어요</span></button>
                         </div>
                     </div>
 
@@ -138,15 +107,9 @@
                             <p class="font-bold text-slate-800 text-base">3) 붐웨커 연주하기</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="selectQ1('3) 붐웨커 연주하기', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😊</span><span>좋았어요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('3) 붐웨커 연주하기', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😐</span><span>보통이에요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('3) 붐웨커 연주하기', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">🙁</span><span>별로였어요</span>
-                            </button>
+                            <button type="button" onclick="selectQ1('붐웨커 연주하기', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😊</span><span>좋았어요</span></button>
+                            <button type="button" onclick="selectQ1('붐웨커 연주하기', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😐</span><span>보통이에요</span></button>
+                            <button type="button" onclick="selectQ1('붐웨커 연주하기', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">🙁</span><span>별로였어요</span></button>
                         </div>
                     </div>
 
@@ -156,15 +119,9 @@
                             <p class="font-bold text-slate-800 text-base">4) 요리활동</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="selectQ1('4) 요리활동', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😊</span><span>좋았어요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('4) 요리활동', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😐</span><span>보통이에요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('4) 요리활동', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">🙁</span><span>별로였어요</span>
-                            </button>
+                            <button type="button" onclick="selectQ1('요리활동', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😊</span><span>좋았어요</span></button>
+                            <button type="button" onclick="selectQ1('요리활동', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😐</span><span>보통이에요</span></button>
+                            <button type="button" onclick="selectQ1('요리활동', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">🙁</span><span>별로였어요</span></button>
                         </div>
                     </div>
 
@@ -174,15 +131,9 @@
                             <p class="font-bold text-slate-800 text-base">5) 미니올림픽</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="selectQ1('5) 미니올림픽', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😊</span><span>좋았어요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('5) 미니올림픽', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">😐</span><span>보통이에요</span>
-                            </button>
-                            <button type="button" onclick="selectQ1('5) 미니올림픽', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1">
-                                <span class="text-3xl">🙁</span><span>별로였어요</span>
-                            </button>
+                            <button type="button" onclick="selectQ1('미니올림픽', '좋았어요', this, 'good')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😊</span><span>좋았어요</span></button>
+                            <button type="button" onclick="selectQ1('미니올림픽', '보통이에요', this, 'soso')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">😐</span><span>보통이에요</span></button>
+                            <button type="button" onclick="selectQ1('미니올림픽', '별로였어요', this, 'bad')" class="btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1"><span class="text-3xl">🙁</span><span>별로였어요</span></button>
                         </div>
                     </div>
 
@@ -193,21 +144,11 @@
                     <h4 class="font-bold text-slate-800 text-base md:text-lg mb-1">2. 올해 가장 재미있었던 활동은 무엇인가요?</h4>
                     <p class="text-xs text-slate-400 mb-4">최대 2개까지 선택해 주세요.</p>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <button type="button" onclick="selectMultiLimit('q2', '깃발 만들기', this, 2)" class="btn-option p-4 border-2 bg-red-50 border-red-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🚩</span><span class="text-sm font-bold text-slate-800">깃발 만들기</span>
-                        </button>
-                        <button type="button" onclick="selectMultiLimit('q2', '텃밭 가꾸기', this, 2)" class="btn-option p-4 border-2 bg-green-50 border-green-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🌱</span><span class="text-sm font-bold text-slate-800">텃밭 가꾸기</span>
-                        </button>
-                        <button type="button" onclick="selectMultiLimit('q2', '붐웨커 연주하기', this, 2)" class="btn-option p-4 border-2 bg-purple-50 border-purple-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🎵</span><span class="text-sm font-bold text-slate-800">붐웨커 연주하기</span>
-                        </button>
-                        <button type="button" onclick="selectMultiLimit('q2', '요리활동', this, 2)" class="btn-option p-4 border-2 bg-orange-50 border-orange-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🍳</span><span class="text-sm font-bold text-slate-800">요리활동</span>
-                        </button>
-                        <button type="button" onclick="selectMultiLimit('q2', '미니올림픽', this, 2)" class="btn-option p-4 border-2 bg-blue-50 border-blue-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🏅</span><span class="text-sm font-bold text-slate-800">미니올림픽</span>
-                        </button>
+                        <button type="button" onclick="selectMultiLimit('q2', '깃발 만들기', this, 2)" class="btn-option p-4 border-2 bg-red-50 border-red-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🚩</span><span class="text-sm font-bold text-slate-800">깃발 만들기</span></button>
+                        <button type="button" onclick="selectMultiLimit('q2', '텃밭 가꾸기', this, 2)" class="btn-option p-4 border-2 bg-green-50 border-green-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🌱</span><span class="text-sm font-bold text-slate-800">텃밭 가꾸기</span></button>
+                        <button type="button" onclick="selectMultiLimit('q2', '붐웨커 연주하기', this, 2)" class="btn-option p-4 border-2 bg-purple-50 border-purple-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🎵</span><span class="text-sm font-bold text-slate-800">붐웨커 연주하기</span></button>
+                        <button type="button" onclick="selectMultiLimit('q2', '요리활동', this, 2)" class="btn-option p-4 border-2 bg-orange-50 border-orange-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🍳</span><span class="text-sm font-bold text-slate-800">요리활동</span></button>
+                        <button type="button" onclick="selectMultiLimit('q2', '미니올림픽', this, 2)" class="btn-option p-4 border-2 bg-blue-50 border-blue-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🏅</span><span class="text-sm font-bold text-slate-800">미니올림픽</span></button>
                     </div>
                 </div>
 
@@ -215,25 +156,14 @@
                 <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-amber-100">
                     <h4 class="font-bold text-slate-800 text-base md:text-lg mb-4">3. 이용인 간담회 활동에 전반적으로 만족하나요?</h4>
                     <div class="grid grid-cols-3 gap-3">
-                        <button type="button" onclick="selectSingle('q3', '만족해요', this, 'good')" class="btn-option p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">😊</span>
-                            <span class="text-sm font-bold text-slate-700">만족해요</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q3', '보통이에요', this, 'soso')" class="btn-option p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">😐</span>
-                            <span class="text-sm font-bold text-slate-700">보통이에요</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q3', '만족하지 않아요', this, 'bad')" class="btn-option p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-2">
-                            <span class="text-4xl">🙁</span>
-                            <span class="text-sm font-bold text-slate-700">만족하지 않아요</span>
-                        </button>
+                        <button type="button" onclick="selectSingle('q3', '만족해요', this, 'good')" class="btn-option p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-2"><span class="text-4xl">😊</span><span class="text-sm font-bold text-slate-700">만족해요</span></button>
+                        <button type="button" onclick="selectSingle('q3', '보통이에요', this, 'soso')" class="btn-option p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-2"><span class="text-4xl">😐</span><span class="text-sm font-bold text-slate-700">보통이에요</span></button>
+                        <button type="button" onclick="selectSingle('q3', '만족하지 않아요', this, 'bad')" class="btn-option p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-2"><span class="text-4xl">🙁</span><span class="text-sm font-bold text-slate-700">만족하지 않아요</span></button>
                     </div>
                 </div>
 
-                <!-- Ⅱ. 욕구조사 영역 -->
                 <div class="bg-emerald-400 text-slate-800 p-4 rounded-2xl shadow-sm flex items-center gap-2 border-2 border-emerald-300">
-                    <span class="text-2xl">💡</span>
-                    <h3 class="font-black text-lg font-aac">Ⅱ. 2027년 활동 욕구조사</h3>
+                    <span class="text-2xl">💡</span><h3 class="font-black text-lg font-aac">Ⅱ. 2027년 활동 욕구조사</h3>
                 </div>
 
                 <!-- 4번 문항 -->
@@ -241,21 +171,11 @@
                     <h4 class="font-bold text-slate-800 text-base md:text-lg mb-1">4. 내년에도 다시 하고 싶은 활동은 무엇인가요?</h4>
                     <p class="text-xs text-slate-400 mb-4">여러 개 선택할 수 있어요.</p>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <button type="button" onclick="selectMulti('q4', '깃발 만들기', this)" class="btn-option p-4 border-2 bg-red-50 border-red-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🚩</span><span class="text-sm font-bold text-slate-800">깃발 만들기</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q4', '텃밭 가꾸기', this)" class="btn-option p-4 border-2 bg-green-50 border-green-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🌱</span><span class="text-sm font-bold text-slate-800">텃밭 가꾸기</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q4', '붐웨커 연주하기', this)" class="btn-option p-4 border-2 bg-purple-50 border-purple-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🎵</span><span class="text-sm font-bold text-slate-800">붐웨커 연주하기</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q4', '요리활동', this)" class="btn-option p-4 border-2 bg-orange-50 border-orange-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🍳</span><span class="text-sm font-bold text-slate-800">요리활동</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q4', '미니올림픽', this)" class="btn-option p-4 border-2 bg-blue-50 border-blue-200 rounded-2xl flex flex-col items-center text-center gap-2">
-                            <span class="text-4xl">🏅</span><span class="text-sm font-bold text-slate-800">미니올림픽</span>
-                        </button>
+                        <button type="button" onclick="selectMulti('q4', '깃발 만들기', this)" class="btn-option p-4 border-2 bg-red-50 border-red-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🚩</span><span class="text-sm font-bold text-slate-800">깃발 만들기</span></button>
+                        <button type="button" onclick="selectMulti('q4', '텃밭 가꾸기', this)" class="btn-option p-4 border-2 bg-green-50 border-green-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🌱</span><span class="text-sm font-bold text-slate-800">텃밭 가꾸기</span></button>
+                        <button type="button" onclick="selectMulti('q4', '붐웨커 연주하기', this)" class="btn-option p-4 border-2 bg-purple-50 border-purple-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🎵</span><span class="text-sm font-bold text-slate-800">붐웨커 연주하기</span></button>
+                        <button type="button" onclick="selectMulti('q4', '요리활동', this)" class="btn-option p-4 border-2 bg-orange-50 border-orange-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🍳</span><span class="text-sm font-bold text-slate-800">요리활동</span></button>
+                        <button type="button" onclick="selectMulti('q4', '미니올림픽', this)" class="btn-option p-4 border-2 bg-blue-50 border-blue-200 rounded-2xl flex flex-col items-center text-center gap-2"><span class="text-4xl">🏅</span><span class="text-sm font-bold text-slate-800">미니올림픽</span></button>
                     </div>
                 </div>
 
@@ -264,324 +184,7 @@
                     <h4 class="font-bold text-slate-800 text-base md:text-lg mb-1">5. 2027년에 새롭게 해보고 싶은 활동은 무엇인가요?</h4>
                     <p class="text-xs text-slate-400 mb-4">하고 싶은 활동을 모두 선택해 주세요.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <button type="button" onclick="selectMulti('q5', '미술·공예활동 (그림 그리기, 만들기)', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-pink-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🎨</span>
-                            <span class="text-sm font-bold text-slate-800">미술·공예활동 (그림 그리기, 만들기)</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '음악활동 (노래, 악기 연주)', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🎤</span>
-                            <span class="text-sm font-bold text-slate-800">음악활동 (노래, 악기 연주)</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '체육활동 (운동, 게임)', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-sky-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">⚽</span>
-                            <span class="text-sm font-bold text-slate-800">체육활동 (운동, 게임)</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '요리·간식 만들기', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🧇</span>
-                            <span class="text-sm font-bold text-slate-800">요리·간식 만들기</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '원예활동 (꽃·식물 키우기)', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🌻</span>
-                            <span class="text-sm font-bold text-slate-800">원예활동 (꽃·식물 키우기)</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '영화 감상', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🎬</span>
-                            <span class="text-sm font-bold text-slate-800">영화 감상</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '외부 체험활동 (나들이, 견학)', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-indigo-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🚌</span>
-                            <span class="text-sm font-bold text-slate-800">외부 체험활동 (나들이, 견학)</span>
-                        </button>
-                        <button type="button" onclick="selectMulti('q5', '협동활동 (친구들과 함께하는 게임)', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left">
-                            <span class="w-12 h-12 bg-teal-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🤝</span>
-                            <span class="text-sm font-bold text-slate-800">협동활동 (친구들과 함께하는 게임)</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 6번 문항 -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
-                    <h4 class="font-bold text-slate-800 text-base md:text-lg mb-4">6. 이용인 간담회 활동은 얼마나 자주 하고 싶나요?</h4>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button type="button" onclick="selectSingle('q6', '한 달에 1번', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">📅</span><span class="text-sm font-bold text-slate-700">한 달에 1번</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q6', '한 달에 2번', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">📆</span><span class="text-sm font-bold text-slate-700">한 달에 2번</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q6', '일주일에 1번', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">⏰</span><span class="text-sm font-bold text-slate-700">일주일에 1번</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q6', '지금처럼 하는 것이 좋아요', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">👍</span><span class="text-sm font-bold text-slate-700">지금처럼 하는 것이 좋아요</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 7번 문항 -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
-                    <h4 class="font-bold text-slate-800 text-base md:text-lg mb-4">7. 내년에 하고 싶은 활동을 직접 선택하고 의견을 내고 싶나요?</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <button type="button" onclick="selectSingle('q7', '네, 직접 선택하고 싶어요', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">🙋‍♂️</span><span class="text-sm font-bold text-slate-700">네, 직접 선택하고 싶어요</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q7', '선생님의 도움을 받아 선택하고 싶어요', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">🤝</span><span class="text-sm font-bold text-slate-700">선생님의 도움을 받아 선택하고 싶어요</span>
-                        </button>
-                        <button type="button" onclick="selectSingle('q7', '아니요', this, 'check')" class="btn-option p-4 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3">
-                            <span class="text-2xl">🙅‍♂️</span><span class="text-sm font-bold text-slate-700">아니요</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 8번 문항 -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-emerald-100">
-                    <h4 class="font-bold text-slate-800 text-base md:text-lg mb-3">8. 그 밖에 하고 싶은 활동이나 선생님에게 전하고 싶은 말이 있나요?</h4>
-                    <textarea id="q8-text" rows="3" placeholder="자유롭게 입력해 주세요 (선택사항)" class="w-full p-4 border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-emerald-400 focus:outline-none"></textarea>
-                </div>
-
-                <!-- 제출하기 버튼 -->
-                <button type="button" id="btn-submit" onclick="submitSurvey()" class="w-full py-4 bg-amber-400 hover:bg-amber-500 text-slate-900 font-black text-xl rounded-2xl shadow-md transition border-2 border-amber-300">
-                    🚀 제출하기
-                </button>
-            </form>
-        </section>
-
-        <!-- 2. 완료 안내 화면 -->
-        <section id="section-thanks" class="hidden bg-white p-8 rounded-3xl shadow-sm text-center border-2 border-amber-200 my-8">
-            <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-bounce">🎉</div>
-            <h2 class="text-2xl md:text-3xl font-black text-slate-800 font-aac mb-3">소중한 응답이 제출되었습니다!</h2>
-            <p class="text-base md:text-lg font-bold text-amber-700 mb-6 leading-relaxed">
-                감사합니다. 여러분의 소중한 의견이 반영되도록 노력하겠습니다. ❤️
-            </p>
-            <button onclick="resetSurvey()" class="px-6 py-3 bg-amber-100 text-amber-900 font-bold rounded-xl hover:bg-amber-200 transition">🔄 새로 제출하기</button>
-        </section>
-
-        <!-- 3. 실시간 통계 영역 -->
-        <section id="section-stats" class="hidden space-y-6">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-amber-100 flex justify-between items-center">
-                <div>
-                    <h3 class="text-xl font-bold text-slate-800 font-aac">📊 실시간 통계 현황</h3>
-                    <p class="text-sm text-slate-500">제출된 설문 응답 집계 결과입니다.</p>
-                </div>
-                <div class="text-right">
-                    <span class="text-sm text-slate-500">총 제출 인원</span>
-                    <p class="text-2xl font-black text-amber-600" id="total-count">0명</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
-                    <h4 class="font-bold text-slate-700 mb-4">3. 전반적 만족도</h4>
-                    <div id="q3-empty-msg" class="text-center py-8 text-slate-400 font-bold">아직 응답이 없습니다.</div>
-                    <canvas id="chart-q3" class="hidden"></canvas>
-                </div>
-                <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
-                    <h4 class="font-bold text-slate-700 mb-4">5. 2027년 희망 신규 활동</h4>
-                    <div id="q5-empty-msg" class="text-center py-8 text-slate-400 font-bold">아직 응답이 없습니다.</div>
-                    <canvas id="chart-q5" class="hidden"></canvas>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
-                <h4 class="font-bold text-slate-700 mb-4">💬 8번 주관식 의견 목록</h4>
-                <div id="comments-list" class="space-y-2 max-h-60 overflow-y-auto text-sm text-slate-700">
-                    <p class="text-slate-400 italic">아직 작성된 의견이 없습니다.</p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <script>
-        // 🍁 낙엽 애니메이션
-        function createLeaf() {
-            const container = document.getElementById('leaf-container');
-            if(!container) return;
-            const leaf = document.createElement('div');
-            leaf.className = 'leaf';
-            const leafIcons = ['🍁', '🍂', '🍃', '🍁'];
-            leaf.innerText = leafIcons[Math.floor(Math.random() * leafIcons.length)];
-            const startLeft = Math.random() * 100;
-            const duration = Math.random() * 5 + 5;
-            const size = Math.random() * 14 + 18;
-            leaf.style.left = startLeft + 'vw';
-            leaf.style.animationDuration = duration + 's';
-            leaf.style.fontSize = size + 'px';
-            container.appendChild(leaf);
-            setTimeout(() => { leaf.remove(); }, duration * 1000);
-        }
-        setInterval(createLeaf, 800);
-
-        document.getElementById('survey-date').valueAsDate = new Date();
-
-        const surveyData = { q1: {}, q2: [], q3: '', q4: [], q5: [], q6: '', q7: '', q8: '' };
-
-        // 응답 데이터 저장용 통계 객체
-        const stats = {
-            q3: { '만족해요': 0, '보통이에요': 0, '만족하지 않아요': 0 },
-            q5: {}
-        };
-
-        function selectQ1(title, val, btn, type) {
-            surveyData.q1[title] = val;
-            Array.from(btn.parentElement.children).forEach(b => {
-                b.className = "btn-option p-3 rounded-xl border-2 border-slate-200 bg-white text-xs md:text-sm font-bold flex flex-col items-center justify-center gap-1";
-            });
-            btn.classList.add('selected-' + type);
-        }
-
-        function selectSingle(key, val, btn, type) {
-            surveyData[key] = val;
-            Array.from(btn.parentElement.children).forEach(b => {
-                b.classList.remove('selected-good', 'selected-soso', 'selected-bad', 'selected-check');
-            });
-            btn.classList.add('selected-' + type);
-        }
-
-        function selectMulti(key, val, btn) {
-            const idx = surveyData[key].indexOf(val);
-            if (idx > -1) {
-                surveyData[key].splice(idx, 1);
-                btn.classList.remove('selected-check');
-            } else {
-                surveyData[key].push(val);
-                btn.classList.add('selected-check');
-            }
-        }
-
-        function selectMultiLimit(key, val, btn, limit) {
-            const idx = surveyData[key].indexOf(val);
-            if (idx > -1) {
-                surveyData[key].splice(idx, 1);
-                btn.classList.remove('selected-check');
-            } else {
-                if (surveyData[key].length >= limit) {
-                    alert(`최대 ${limit}개까지만 선택할 수 있습니다.`);
-                    return;
-                }
-                surveyData[key].push(val);
-                btn.classList.add('selected-check');
-            }
-        }
-
-        let isSubmitting = false;
-        let totalCount = 0;
-        let comments = [];
-
-        function submitSurvey() {
-            if (isSubmitting) return;
-
-            const name = document.getElementById('user-name').value.trim();
-            if (!name) { alert('이름을 입력해주세요!'); return; }
-            if (Object.keys(surveyData.q1).length < 5) { alert('1번 만족도 항목을 모두 선택해주세요!'); return; }
-            if (!surveyData.q3) { alert('3번 전반적 만족도를 선택해주세요!'); return; }
-
-            isSubmitting = true;
-            const btn = document.getElementById('btn-submit');
-            btn.disabled = true;
-            btn.innerText = '⏳ 제출 처리 중...';
-            btn.classList.replace('bg-amber-400', 'bg-slate-300');
-
-            totalCount++;
-            
-            // 통계 집계
-            if (surveyData.q3) stats.q3[surveyData.q3]++;
-            surveyData.q5.forEach(act => {
-                stats.q5[act] = (stats.q5[act] || 0) + 1;
-            });
-
-            const q8Text = document.getElementById('q8-text').value.trim();
-            if (q8Text) comments.push(`${name}: ${q8Text}`);
-
-            document.getElementById('total-count').innerText = totalCount + '명';
-
-            setTimeout(() => {
-                document.getElementById('section-survey').classList.add('hidden');
-                document.getElementById('section-thanks').classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                isSubmitting = false;
-                btn.disabled = false;
-                btn.innerText = '🚀 제출하기';
-                btn.classList.replace('bg-slate-300', 'bg-amber-400');
-            }, 300);
-        }
-
-        function resetSurvey() {
-            document.getElementById('user-name').value = '';
-            document.getElementById('q8-text').value = '';
-            location.reload();
-        }
-
-        function switchTab(tab) {
-            if (tab === 'survey') {
-                document.getElementById('section-survey').classList.remove('hidden');
-                document.getElementById('section-stats').classList.add('hidden');
-                document.getElementById('section-thanks').classList.add('hidden');
-            } else {
-                document.getElementById('section-survey').classList.add('hidden');
-                document.getElementById('section-thanks').classList.add('hidden');
-                document.getElementById('section-stats').classList.remove('hidden');
-                renderCharts();
-            }
-        }
-
-        let chart3, chart5;
-        function renderCharts() {
-            if (totalCount === 0) {
-                document.getElementById('q3-empty-msg').classList.remove('hidden');
-                document.getElementById('chart-q3').classList.add('hidden');
-                document.getElementById('q5-empty-msg').classList.remove('hidden');
-                document.getElementById('chart-q5').classList.add('hidden');
-                return;
-            }
-
-            document.getElementById('q3-empty-msg').classList.add('hidden');
-            document.getElementById('chart-q3').classList.remove('hidden');
-            document.getElementById('q5-empty-msg').classList.add('hidden');
-            document.getElementById('chart-q5').classList.remove('hidden');
-
-            // 3번 차트
-            const ctx3 = document.getElementById('chart-q3').getContext('2d');
-            if (chart3) chart3.destroy();
-            chart3 = new Chart(ctx3, {
-                type: 'doughnut',
-                data: {
-                    labels: ['만족해요 😊', '보통이에요 😐', '만족하지 않아요 🙁'],
-                    datasets: [{
-                        data: [stats.q3['만족해요'], stats.q3['보통이에요'], stats.q3['만족하지 않아요']],
-                        backgroundColor: ['#22c55e', '#eab308', '#ef4444']
-                    }]
-                }
-            });
-
-            // 5번 차트
-            const ctx5 = document.getElementById('chart-q5').getContext('2d');
-            if (chart5) chart5.destroy();
-            const q5Labels = Object.keys(stats.q5);
-            const q5Values = Object.values(stats.q5);
-            chart5 = new Chart(ctx5, {
-                type: 'bar',
-                data: {
-                    labels: q5Labels,
-                    datasets: [{
-                        label: '선택 횟수',
-                        data: q5Values,
-                        backgroundColor: '#6366f1'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
-                }
-            });
-
-            const commentsList = document.getElementById('comments-list');
-            if (comments.length > 0) {
-                commentsList.innerHTML = comments.map(c => `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">💬 ${c}</div>`).join('');
-            }
-        }
-    </script>
-</body>
-</html>
+                        <button type="button" onclick="selectMulti('q5', '미술·공예활동', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left"><span class="w-12 h-12 bg-pink-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🎨</span><span class="text-sm font-bold text-slate-800">미술·공예활동 (그림, 만들기)</span></button>
+                        <button type="button" onclick="selectMulti('q5', '음악활동', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left"><span class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">🎤</span><span class="text-sm font-bold text-slate-800">음악활동 (노래, 악기)</span></button>
+                        <button type="button" onclick="selectMulti('q5', '체육활동', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left"><span class="w-12 h-12 bg-sky-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">⚽</span><span class="text-sm font-bold text-slate-800">체육활동 (운동, 게임)</span></button>
+                        <button type="button" onclick="selectMulti('q5', '요리·간식 만들기', this)" class="btn-option p-3.5 border-2 border-slate-200 bg-slate-50 rounded-2xl flex items-center gap-3 text-left"><span class="w-12 h-12 bg-amber-100 rounded
