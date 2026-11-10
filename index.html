@@ -22,13 +22,19 @@
         .selected-bad { background-color: #fee2e2 !important; border-color: #ef4444 !important; box-shadow: 0 8px 12px -2px rgba(239, 68, 68, 0.3); transform: translateY(-2px); }
         .selected-check { background-color: #e0e7ff !important; border-color: #6366f1 !important; color: #4338ca !important; box-shadow: 0 8px 12px -2px rgba(99, 102, 241, 0.3); transform: translateY(-2px); }
 
-        /* 🍁 떨어지는 가을 낙엽 애니메이션 */
+        /* 🍁 떨어지는 가을 낙엽 애니메이션 복원 */
         .leaf-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999; overflow: hidden;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 99999;
+            overflow: hidden;
         }
         .leaf {
-            position: absolute; top: -50px; font-size: 26px; user-select: none;
+            position: absolute;
+            top: -50px;
+            font-size: 28px;
+            user-select: none;
             animation: fall linear infinite;
         }
         @keyframes fall {
@@ -445,104 +451,3 @@
                 isSubmitting = false;
                 btn.disabled = false;
                 btn.innerText = '🚀 완료했어요! 제출하기';
-                btn.classList.replace('bg-slate-300', 'bg-amber-400');
-            }, 300);
-        }
-
-        function resetSurvey() {
-            document.getElementById('user-name').value = '';
-            document.getElementById('q8-text').value = '';
-            location.reload();
-        }
-
-        function switchTab(tab) {
-            if (tab === 'survey') {
-                document.getElementById('section-survey').classList.remove('hidden');
-                document.getElementById('section-stats').classList.add('hidden');
-                document.getElementById('section-thanks').classList.add('hidden');
-            } else {
-                document.getElementById('section-survey').classList.add('hidden');
-                document.getElementById('section-thanks').classList.add('hidden');
-                document.getElementById('section-stats').classList.remove('hidden');
-                renderCharts();
-            }
-        }
-
-        let charts = {};
-        function renderCharts() {
-            if (totalCount === 0) {
-                document.getElementById('stats-empty-msg').classList.remove('hidden');
-                document.getElementById('stats-charts-container').classList.add('hidden');
-                return;
-            }
-
-            document.getElementById('stats-empty-msg').classList.add('hidden');
-            document.getElementById('stats-charts-container').classList.remove('hidden');
-
-            const chartOptions = { responsive: true, maintainAspectRatio: false };
-
-            if (charts.q1) charts.q1.destroy();
-            const q1Acts = Object.keys(stats.q1);
-            charts.q1 = new Chart(document.getElementById('chart-q1'), {
-                type: 'bar',
-                data: {
-                    labels: q1Acts,
-                    datasets: [
-                        { label: '좋았어요 😊', data: q1Acts.map(a => stats.q1[a]['좋았어요']), backgroundColor: '#22c55e' },
-                        { label: '보통이에요 😐', data: q1Acts.map(a => stats.q1[a]['보통이에요']), backgroundColor: '#eab308' },
-                        { label: '별로였어요 🙁', data: q1Acts.map(a => stats.q1[a]['별로였어요']), backgroundColor: '#ef4444' }
-                    ]
-                },
-                options: { ...chartOptions, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
-            });
-
-            if (charts.q2) charts.q2.destroy();
-            charts.q2 = new Chart(document.getElementById('chart-q2'), {
-                type: 'bar',
-                data: { labels: Object.keys(stats.q2), datasets: [{ label: '선택 횟수', data: Object.values(stats.q2), backgroundColor: '#f59e0b' }] },
-                options: chartOptions
-            });
-
-            if (charts.q3) charts.q3.destroy();
-            charts.q3 = new Chart(document.getElementById('chart-q3'), {
-                type: 'doughnut',
-                data: { labels: Object.keys(stats.q3), datasets: [{ data: Object.values(stats.q3), backgroundColor: ['#22c55e', '#eab308', '#ef4444'] }] },
-                options: chartOptions
-            });
-
-            if (charts.q4) charts.q4.destroy();
-            charts.q4 = new Chart(document.getElementById('chart-q4'), {
-                type: 'bar',
-                data: { labels: Object.keys(stats.q4), datasets: [{ label: '선택 횟수', data: Object.values(stats.q4), backgroundColor: '#10b981' }] },
-                options: chartOptions
-            });
-
-            if (charts.q5) charts.q5.destroy();
-            charts.q5 = new Chart(document.getElementById('chart-q5'), {
-                type: 'bar',
-                data: { labels: Object.keys(stats.q5), datasets: [{ label: '선택 횟수', data: Object.values(stats.q5), backgroundColor: '#6366f1' }] },
-                options: chartOptions
-            });
-
-            if (charts.q6) charts.q6.destroy();
-            charts.q6 = new Chart(document.getElementById('chart-q6'), {
-                type: 'pie',
-                data: { labels: Object.keys(stats.q6), datasets: [{ data: Object.values(stats.q6), backgroundColor: ['#3b82f6', '#8b5cf6', '#ec4899', '#14b8a6'] }] },
-                options: chartOptions
-            });
-
-            if (charts.q7) charts.q7.destroy();
-            charts.q7 = new Chart(document.getElementById('chart-q7'), {
-                type: 'pie',
-                data: { labels: Object.keys(stats.q7), datasets: [{ data: Object.values(stats.q7), backgroundColor: ['#f43f5e', '#8b5cf6', '#64748b'] }] },
-                options: chartOptions
-            });
-
-            const commentsList = document.getElementById('comments-list');
-            if (comments.length > 0) {
-                commentsList.innerHTML = comments.map(c => `<div class="p-3 bg-slate-50 rounded-xl border border-slate-200">💬 ${c}</div>`).join('');
-            }
-        }
-    </script>
-</body>
-</html>
